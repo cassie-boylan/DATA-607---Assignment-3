@@ -1,0 +1,57 @@
+---
+title: "Assignment 3"
+author: "Cassie Boylan"
+date: "`r Sys.Date()`"
+output: openintro::lab_report
+---
+loading libraries needed and importing data
+```{r load-packages-data, message=FALSE}
+library(tidyverse)
+library(RCurl) 
+x <- getURL("https://raw.githubusercontent.com/fivethirtyeight/data/master/college-majors/majors-list.csv")
+```
+## Exercise #1
+There are 3 majors listed in this data that contain 'DATA' or 'STATISTICS'.  
+  
+These majors are:  
+* MANAGEMENT INFORMATION SYSTEMS AND STATISTICS  
+* COMPUTER PROGRAMMING AND DATA PROCESSING  
+* STATISTICS AND DECISION SCIENCE  
+```{r read-in-csv-file}
+majors <- read.csv(text = x)
+```
+
+```{r}
+data_stat_majors <- grep("DATA|STATISTICS",majors$Major,value=TRUE)
+data_stat_majors
+```
+
+## Exercise #2  
+  
+Paste function will concatenate the vectors listed and convert them into datatype character.  This is similar to what c() function does - combines values into a vector & coerces all elements/arguments it is combining into a common type  
+
+Because there are no delimiters being used here, I would use a simpler paste0 which simply concatenates without a separator - like c().  
+  
+(I am assuming a variable name here as 'fruits')  
+  
+**paste0(fruits, collapse=NULL)**  
+  
+  
+## Exercise #3  
+  
+1. will match any string containing a character repeated 3 times in a row
+  
+2. will match any repeated pair of letters that are **reversed** on 2nd repeat - for example 'anna' or 'deed'.  
+  
+3. will match any repeated pair of letters  
+  
+4. will match any string containing a character that occurs 3 times with any random **single**character in between each instance - for example 'anaka' or 'ululu'  
+  
+5. will match any string containing a set of characters that repeats in reverse with any amount of characters or none in between - for example 'abcdefcba' or 'abccba'  
+  
+  
+## Exercise #4  
+
+ * ^(.).*\1$  
+ * (..).*\1
+ * (.).*\1.*\1
